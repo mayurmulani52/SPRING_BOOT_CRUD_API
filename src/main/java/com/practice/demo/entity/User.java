@@ -19,14 +19,22 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String userName;
 	private String firstName;
 	private String lastName;
 	private boolean active;
-	
+
 	public User() {
+	}
+
+	public User(long id, String userName, String firstName, String lastName, boolean active) {
+		this.id = id;
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.active = active;
 	}
 
 	public User(String userName, String firstName, String lastName, boolean active) {
