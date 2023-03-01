@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.practice.demo.entity.User;
 import com.practice.demo.exception.PracticeDemoRunTimeException;
+import com.practice.demo.model.UserRequest;
 
 public interface UserService {
 	
@@ -14,7 +15,7 @@ public interface UserService {
 	
 	User createUser(String userName, String firstName, String lastName) throws PracticeDemoRunTimeException;
 	
-	User updateUser(long id, User user) throws PracticeDemoRunTimeException;
+	User updateUser(long id, UserRequest user) throws PracticeDemoRunTimeException;
 	
 	void deleteUser(long id) throws PracticeDemoRunTimeException;
 

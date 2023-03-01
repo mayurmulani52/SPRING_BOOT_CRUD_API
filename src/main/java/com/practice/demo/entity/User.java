@@ -22,6 +22,9 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private boolean active;
+	
+	public User() {
+	}
 
 	public User(String userName, String firstName, String lastName, boolean active) {
 		this.userName = userName;

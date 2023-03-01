@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.practice.demo.entity.User;
 import com.practice.demo.exception.PracticeDemoRunTimeException;
+import com.practice.demo.model.UserRequest;
 import com.practice.demo.service.UserService;
 
 import jakarta.validation.Valid;
@@ -61,14 +62,14 @@ public class DemoController {
 	}
 
 	@PostMapping("/users")
-	public ResponseEntity<User> createUser(@RequestBody User user) throws PracticeDemoRunTimeException {
+	public ResponseEntity<User> createUser(@RequestBody UserRequest user) throws PracticeDemoRunTimeException {
 		return new ResponseEntity<>(userService.createUser(user.getUserName(), user.getFirstName(), user.getLastName()),
 				HttpStatus.CREATED);
 
 	}
 
 	@PutMapping("/users/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
+	public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody UserRequest user) {
 		return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.CREATED);
 	}
 

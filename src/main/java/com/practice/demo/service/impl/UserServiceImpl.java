@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.practice.demo.entity.User;
 import com.practice.demo.exception.PracticeDemoRunTimeException;
 import com.practice.demo.exception.ResourceNotFoundException;
+import com.practice.demo.model.UserRequest;
 import com.practice.demo.repository.UserRepository;
 import com.practice.demo.service.UserService;
 
@@ -32,13 +31,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers(int page, int size) throws PracticeDemoRunTimeException {
 
-		page = page - 1;
 		if (page < 0)
 			throw new PracticeDemoRunTimeException("Page index must be greater than zero!");
 		else if (size <= 0)
 			throw new PracticeDemoRunTimeException("Size index must be greater than zero!");
 
-		Page<User> listOfUsers = userRepository.findAll(PageRequest.of(page, size, Direction.ASC));
+		Page<User> listOfUsers = userRepository.findAll(PageRequest.of(page, size, Direction.ASC, "id"));
 
 		return listOfUsers.getContent();
 	}
@@ -65,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateUser(long id, User user) throws PracticeDemoRunTimeException {
+	public User updateUser(long id, UserRequest user) throws PracticeDemoRunTimeException {
 		Optional<User> existingUser = userRepository.findById(id);
 
 		if (existingUser.isPresent()) {
@@ -73,7 +71,6 @@ public class UserServiceImpl implements UserService {
 			_user.setUserName(user.getUserName());
 			_user.setFirstName(user.getFirstName());
 			_user.setLastName(user.getLastName());
-			_user.setActive(user.isActive());
 			return userRepository.save(_user);
 		} else {
 			throw new PracticeDemoRunTimeException();
