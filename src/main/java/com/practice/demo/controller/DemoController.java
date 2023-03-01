@@ -70,7 +70,7 @@ public class DemoController {
 
 	@PutMapping("/users/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody UserRequest user) {
-		return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.CREATED);
+		return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/users/{id}")

@@ -43,7 +43,10 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	compileOnly 'org.projectlombok:lombok:1.18.4'
 	annotationProcessor 'org.projectlombok:lombok:1.18.4'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+   testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+   testCompile group: 'junit', name: 'junit'
+   testCompile group: 'org.hsqldb', name: 'hsqldb'
 }
 
 tasks.named('test') {
