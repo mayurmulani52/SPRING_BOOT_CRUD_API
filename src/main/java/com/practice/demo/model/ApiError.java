@@ -1,5 +1,7 @@
 package com.practice.demo.model;
 
+import java.io.Serializable;
+
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,9 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Validated
-public class ApiError {
-	public ApiError(String valueOf, String reasonPhrase, String localizedMessage, String string) {
-	}
+public class ApiError implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("code")
 	private String code = null;
@@ -29,4 +30,12 @@ public class ApiError {
 
 	@JsonProperty("errorId")
 	private String errorId = null;
+
+	public ApiError(String code, String status, String message, String errorId) {
+		this.code = code;
+		this.status = status;
+		this.message = message;
+		this.errorId = errorId;
+	}
+
 }
