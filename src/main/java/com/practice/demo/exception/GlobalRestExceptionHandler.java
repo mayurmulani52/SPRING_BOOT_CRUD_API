@@ -57,4 +57,14 @@ public class GlobalRestExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<Object>(apiError, HttpStatus.BAD_REQUEST);
 	}
 
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<Object> userNotFoundException(ResourceNotFoundException ex) {
+
+		String errodId = UUID.randomUUID().toString();
+		ApiError apiError = new ApiError(String.valueOf(HttpStatus.NOT_FOUND.value()),
+				HttpStatus.NOT_FOUND.getReasonPhrase(), ex.getLocalizedMessage(), errodId);
+
+		return new ResponseEntity<Object>(apiError, HttpStatus.NOT_FOUND);
+
+	}
 }

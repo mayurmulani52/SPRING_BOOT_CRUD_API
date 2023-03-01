@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.practice.demo.entity.User;
 import com.practice.demo.exception.PracticeDemoRunTimeException;
+import com.practice.demo.exception.ResourceNotFoundException;
 import com.practice.demo.model.UserRequest;
 import com.practice.demo.service.UserService;
 
@@ -62,7 +63,7 @@ public class DemoController {
 	}
 
 	@GetMapping("/users/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable("id") long id) throws PracticeDemoRunTimeException {
+	public ResponseEntity<User> getUserById(@PathVariable("id") long id) throws ResourceNotFoundException {
 		logger.info("Inside the Controller method of getUserById!");
 		return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
 	}

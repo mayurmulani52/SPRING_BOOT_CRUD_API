@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.practice.demo.entity.User;
 import com.practice.demo.exception.PracticeDemoRunTimeException;
+import com.practice.demo.exception.ResourceNotFoundException;
 import com.practice.demo.model.UserRequest;
 import com.practice.demo.repository.UserRepository;
 import com.practice.demo.service.UserService;
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findById(long id) throws PracticeDemoRunTimeException {
+	public User findById(long id) throws ResourceNotFoundException {
 		logger.info("Inside the method of findById!");
 
 		Optional<User> user = userRepository.findById(id);
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
 		} catch (Exception e) {
 			logger.error(e.getStackTrace().toString());
-			throw new PracticeDemoRunTimeException("User does not exist against id :" + id, e);
+			throw new ResourceNotFoundException("User does not exist against id :" + id, e);
 		}
 
 	}

@@ -4,13 +4,14 @@ import java.util.List;
 
 import com.practice.demo.entity.User;
 import com.practice.demo.exception.PracticeDemoRunTimeException;
+import com.practice.demo.exception.ResourceNotFoundException;
 import com.practice.demo.model.UserRequest;
 
 public interface UserService {
 	
 	List<User> getAllUsers(int page, int size) throws PracticeDemoRunTimeException;
 	
-	User findById(long id) throws PracticeDemoRunTimeException;
+	User findById(long id) throws ResourceNotFoundException;
 	
 	User createUser(String userName, String firstName, String lastName) throws PracticeDemoRunTimeException;
 	
