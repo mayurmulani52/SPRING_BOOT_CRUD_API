@@ -34,7 +34,7 @@ class DemoControllerTest {
 		Mockito.when(userService.createUser(user.getUserName(), user.getFirstName(), user.getLastName()))
 				.thenReturn(user);
 		mockMvc.perform(
-				MockMvcRequestBuilders.post("/student/").contentType(MediaType.APPLICATION_JSON)
+				MockMvcRequestBuilders.post("/users/").contentType(MediaType.APPLICATION_JSON)
 						.content("{\r\n" + "  \"userName\": \"mayurmulani52\",\r\n" + "  \"firstName\": \"Mayur\",\r\n"
 								+ "  \"lastName\": \"Mulani\",\r\n" + "}"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
