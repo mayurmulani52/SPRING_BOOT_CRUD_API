@@ -7,11 +7,11 @@ Spring Boot Crud API project allows developers to understand basis simple spring
 http://localhost:8080/swagger-ui/index.html
 
 
-#API Doc
+# API Doc
 http://localhost:8080/api-docs
 
 
-#Database
+# Database
 H2- Inmemory 
 
 #### Building for source
