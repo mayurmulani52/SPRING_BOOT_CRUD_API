@@ -36,8 +36,6 @@ public class DemoController {
 	private static final int DEFAULT_CURRENT_PAGE = 0;
 	private static final int DEFAULT_CURRENT_PAGESIZE = 10;
 
-	private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
-
 	@GetMapping("/")
 	public String welcome() {
 		return "Hello, Welcome to Demo Application!";
@@ -47,7 +45,7 @@ public class DemoController {
 	public ResponseEntity<List<User>> getAllUsers(@Valid @RequestParam(value = "page") Optional<Integer> page,
 			@Valid @RequestParam(value = "size") Optional<Integer> size) throws PracticeDemoRunTimeException {
 
-		logger.info("Inside the Controller method of getAllUsers!");
+		log.info("Inside the Controller method of getAllUsers!");
 
 		int currentPage = DEFAULT_CURRENT_PAGE;
 		if (page.isPresent()) {
@@ -64,13 +62,13 @@ public class DemoController {
 
 	@GetMapping("/users/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") long id) throws ResourceNotFoundException {
-		logger.info("Inside the Controller method of getUserById!");
+		log.info("Inside the Controller method of getUserById!");
 		return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/users")
 	public ResponseEntity<User> createUser(@RequestBody UserRequest user) throws PracticeDemoRunTimeException {
-		logger.info("Inside the Controller method of createUser!");
+		log.info("Inside the Controller method of createUser!");
 		return new ResponseEntity<>(userService.createUser(user.getUserName(), user.getFirstName(), user.getLastName()),
 				HttpStatus.CREATED);
 
@@ -78,14 +76,14 @@ public class DemoController {
 
 	@PutMapping("/users/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody UserRequest user) {
-		logger.info("Inside the Controller method of updateUser!");
+		log.info("Inside the Controller method of updateUser!");
 		return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/users/{id}")
 	public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
 
-		logger.info("Inside the Controller method of deleteUser!");
+		log.info("Inside the Controller method of deleteUser!");
 		userService.deleteUser(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

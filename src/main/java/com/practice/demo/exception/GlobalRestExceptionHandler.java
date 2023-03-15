@@ -28,7 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class GlobalRestExceptionHandler extends ResponseEntityExceptionHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(GlobalRestExceptionHandler.class);
 
 	@ExceptionHandler(value = { PracticeDemoRunTimeException.class })
 	protected ResponseEntity<Object> handlePracticeDemoRuntimeException(PracticeDemoRunTimeException ex,

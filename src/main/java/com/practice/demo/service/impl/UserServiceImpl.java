@@ -3,6 +3,7 @@ package com.practice.demo.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import com.practice.demo.service.UserService;
 
 import lombok.extern.slf4j.XSlf4j;
 
-@XSlf4j
+@Slf4j
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class UserServiceImpl implements UserService {
@@ -30,12 +31,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
-	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Override
 	public List<User> getAllUsers(int page, int size) throws PracticeDemoRunTimeException {
 
-		logger.info("Inside the method of getAllUsers!");
+		log.info("Inside the method of getAllUsers!");
 
 		if (page < 0)
 			throw new PracticeDemoRunTimeException("Page index must be greater than zero!");
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findById(long id) throws ResourceNotFoundException {
-		logger.info("Inside the method of findById!");
+		log.info("Inside the method of findById!");
 
 		Optional<User> user = userRepository.findById(id);
 
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 			return user.get();
 
 		} catch (Exception e) {
-			logger.error(e.getStackTrace().toString());
+			log.error(e.getStackTrace().toString());
 			throw new ResourceNotFoundException("User does not exist against id :" + id, e);
 		}
 
@@ -66,12 +66,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User createUser(String userName, String firstName, String lastName) throws PracticeDemoRunTimeException {
 
-		logger.info("Inside the method of createUser!");
+		log.info("Inside the method of createUser!");
 		try {
 			User user = userRepository.save(new User(userName, firstName, lastName, Boolean.TRUE));
 			return user;
 		} catch (Exception e) {
-			logger.error(e.getStackTrace().toString());
+			log.error(e.getStackTrace().toString());
 			throw e;
 		}
 
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(long id, UserRequest user) throws PracticeDemoRunTimeException {
 
-		logger.info("Inside the method of updateUser!");
+		log.info("Inside the method of updateUser!");
 		Optional<User> existingUser = userRepository.findById(id);
 
 		if (existingUser.isPresent()) {
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 			_user.setLastName(user.getLastName());
 			return userRepository.save(_user);
 		} else {
-			logger.error("User not found against ID!");
+			log.error("User not found against ID!");
 			throw new PracticeDemoRunTimeException("User not found against ID!");
 		}
 	}
@@ -98,11 +98,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUser(long id) throws PracticeDemoRunTimeException {
 
-		logger.info("Inside the method of deleteUser!");
+		log.info("Inside the method of deleteUser!");
 		try {
 			userRepository.deleteById(id);
 		} catch (Exception e) {
-			logger.error(e.getStackTrace().toString());
+			log.error(e.getStackTrace().toString());
 			throw e;
 		}
 	}

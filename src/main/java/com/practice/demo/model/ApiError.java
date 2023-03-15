@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Validated
 public class ApiError implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,12 +29,5 @@ public class ApiError implements Serializable {
 
 	@JsonProperty("errorId")
 	private String errorId = null;
-
-	public ApiError(String code, String status, String message, String errorId) {
-		this.code = code;
-		this.status = status;
-		this.message = message;
-		this.errorId = errorId;
-	}
 
 }
